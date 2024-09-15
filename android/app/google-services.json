@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1045554326606",
+    "project_id": "verscope-d7152",
+    "storage_bucket": "verscope-d7152.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045554326606:android:1b61e85a99f53fe577271f",
+        "android_client_info": {
+          "package_name": "com.example.vizscope"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuTjLL7DRAOW9f7oOQQPbT3lFAUHsutiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
