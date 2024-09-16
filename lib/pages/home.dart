@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vizscope/pages/project_details.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -90,7 +91,7 @@ class _HomeState extends State<Home> {
                         final project = Home.projects[index];
                         return InkWell(
                           onTap: () {
-                            /*To be routed towards the project detail page
+                            //To be routed towards the project detail page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -98,7 +99,7 @@ class _HomeState extends State<Home> {
                                   projectName: project['name']!,
                                 ),
                               ),
-                            );*/
+                            );
                           },
                           child: ProjectCard(
                             name: project['name']!,
@@ -223,7 +224,7 @@ class _ProjectCardState extends State<ProjectCard> {
     return SizedBox(
       height: 100,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
         child: Material(
           elevation: 5,
           borderRadius: BorderRadius.circular(15),

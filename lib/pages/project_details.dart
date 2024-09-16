@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 
 class ProjectDetails extends StatefulWidget {
   final String projectName;
@@ -8,6 +8,7 @@ class ProjectDetails extends StatefulWidget {
   const ProjectDetails({super.key, required this.projectName});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProjectDetailsState createState() => _ProjectDetailsState();
 }
 
@@ -22,30 +23,30 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   }
 
   Future<void> fetchProjectDetails() async {
-    final url = 'https://example.com/api/project?name=${widget.projectName}';
-    try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        setState(() {
-          projectDetails = json.decode(response.body);
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to load project details')),
-        );
-      }
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
-    }
+    // final url = 'https://example.com/api/project?name=${widget.projectName}';
+    // try {
+    //   final response = await http.get(Uri.parse(url));
+    //   if (response.statusCode == 200) {
+    //     setState(() {
+    //       projectDetails = json.decode(response.body);
+    //       isLoading = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       isLoading = false;
+    //     });
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       const SnackBar(content: Text('Failed to load project details')),
+    //     );
+    //   }
+    // } catch (e) {
+    //   setState(() {
+    //     isLoading = false;
+    //   });
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text('Error: $e')),
+    //   );
+    // }
   }
 
   @override

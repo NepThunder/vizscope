@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:vizscope/pages/login_authentication.dart';
 import 'package:vizscope/pages/home.dart';
 import 'package:vizscope/pages/splash_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   Logger logger = Logger();
@@ -11,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await Firebase.initializeApp();
+    await dotenv.load(fileName: ".env");
   } catch (e) {
     logger.e(e.toString());
   }

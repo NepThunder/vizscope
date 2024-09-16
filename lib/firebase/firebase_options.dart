@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -39,16 +40,16 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBuTjLL7DRAOW9f7oOQQPbT3lFAUHsutiU',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['android_api_key'] ?? '',
     appId: '1:1045554326606:android:1b61e85a99f53fe577271f',
     messagingSenderId: '1045554326606',
     projectId: 'verscope-d7152',
     storageBucket: 'verscope-d7152.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC34p-SgLJfS-YQG1g9RKoH7b6OLzhsZsQ',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['ios_api_key'] ?? '',
     appId: '1:1045554326606:ios:05c046fe52a85e9277271f',
     messagingSenderId: '1045554326606',
     projectId: 'verscope-d7152',
