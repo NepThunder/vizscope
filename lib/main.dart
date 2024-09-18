@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:vizscope/pages/login_authentication.dart';
 import 'package:vizscope/pages/home.dart';
+import 'package:vizscope/pages/project_details.dart';
 import 'package:vizscope/pages/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -23,6 +24,8 @@ void main() async {
       '/': (context) => const SplashScreen(),
       '/authentication': (context) => const LoginAuthentication(),
       '/home': (context) => const Home(),
+      '/details': (context) =>
+          const ProjectDetails(projectName: "Horizn Heights Development"),
     },
     debugShowCheckedModeBanner: false,
   ));

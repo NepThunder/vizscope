@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
+import 'dart:ui';
 
 class ProjectDetails extends StatefulWidget {
   final String projectName;
-
   const ProjectDetails({super.key, required this.projectName});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ProjectDetailsState createState() => _ProjectDetailsState();
+  State<ProjectDetails> createState() => _ProjectDetailsState();
 }
 
 class _ProjectDetailsState extends State<ProjectDetails> {
@@ -19,67 +16,354 @@ class _ProjectDetailsState extends State<ProjectDetails> {
   @override
   void initState() {
     super.initState();
-    fetchProjectDetails();
-  }
-
-  Future<void> fetchProjectDetails() async {
-    // final url = 'https://example.com/api/project?name=${widget.projectName}';
-    // try {
-    //   final response = await http.get(Uri.parse(url));
-    //   if (response.statusCode == 200) {
-    //     setState(() {
-    //       projectDetails = json.decode(response.body);
-    //       isLoading = false;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       isLoading = false;
-    //     });
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       const SnackBar(content: Text('Failed to load project details')),
-    //     );
-    //   }
-    // } catch (e) {
-    //   setState(() {
-    //     isLoading = false;
-    //   });
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Error: $e')),
-    //   );
-    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.projectName),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background_image.png'),
+          fit: BoxFit.cover,
+        ),
       ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : projectDetails != null
-              ? Padding(
-                  padding: const EdgeInsets.all(16.0),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: const Text(
+            "Back",
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        projectDetails!['name'] ?? 'Unknown',
+                        widget.projectName,
                         style: const TextStyle(
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(183, 76, 71, 1),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        projectDetails!['description'] ??
-                            'No description available',
-                        style: const TextStyle(fontSize: 16),
+                      const SizedBox(height: 8),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Stack(
+                          children: [
+                            Container(
+                              color: Colors.grey,
+                              child: Image.asset(
+                                "assets/dummyImages/dummyimage.png",
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              left: 0,
+                              right: 0,
+                              child: Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.3),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: ElevatedButton(
+                                        onPressed: (
+                                          //TODO: Implement the button press
+                                        ) {},
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.transparent,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                        child: const Text(
+                                          "More",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                )
-              : const Center(child: Text('No project details available')),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: Text(
+                      "About Project",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Icon(Icons.circle, size: 8),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Icon(Icons.circle, size: 8),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Icon(Icons.circle, size: 8),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Icon(Icons.circle, size: 8),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                Icon(Icons.circle, size: 8),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              "Site Location:",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "1st Main Road, Anandnagar, Hebbal Bengaluru, 560-024",
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      const Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Budget: ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(text: "5,55,55,555 INR"),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Site Manager: ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(text: "Mr. Ravi Kumar"),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Contact: ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(text: "1234567890"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: Text(
+                      "Project Details",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Column(
+                    children: [
+                      ProjectButton(name: "FCS Refurbishment"),
+                      ProjectButton(name: "Schedule page"),
+                      ProjectButton(name: "BOI Tracker"),
+                      ProjectButton(name: "Weekly report page"),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Pending Work",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProjectButton extends StatelessWidget {
+  final String name;
+
+  const ProjectButton({super.key, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              blurRadius: 8,
+              spreadRadius: 1,
+              offset: const Offset(-8, 10),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ElevatedButton(
+          onPressed: () {
+            //TODO: Implement the button press
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromRGBO(85, 194, 196, 1),
+            minimumSize: const Size(double.infinity, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          child: Text(
+            name,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ),
+      ),
     );
   }
 }
