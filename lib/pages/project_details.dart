@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
+
+import 'package:vizscope/pages/image_grid_view.dart';
 
 class ProjectDetails extends StatefulWidget {
   final String projectName;
@@ -65,7 +66,9 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         child: Stack(
                           children: [
                             Container(
-                              color: Colors.grey,
+                              width: double.infinity,
+                              height: 150,
+                              color: Colors.grey[200],
                               child: Image.asset(
                                 "assets/dummyImages/dummyimage.png",
                               ),
@@ -77,30 +80,33 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                               child: Center(
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 10, sigmaY: 10),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.3),
-                                        borderRadius: BorderRadius.circular(15),
+                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.5),
+                                      // borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ImageGridViewPage()),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.transparent,
+                                        elevation: 0,
+                                        // shape: RoundedRectangleBorder(
+                                        //   borderRadius:
+                                        //       BorderRadius.circular(10),
+                                        // ),
                                       ),
-                                      child: ElevatedButton(
-                                        onPressed: (
-                                          //TODO: Implement the button press
-                                        ) {},
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.transparent,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                        ),
-                                        child: const Text(
-                                          "More",
-                                          style: TextStyle(color: Colors.black),
-                                        ),
+                                      child: const Text(
+                                        "More",
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                     ),
                                   ),
@@ -334,15 +340,15 @@ class ProjectButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.5),
-              blurRadius: 8,
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 2,
               spreadRadius: 1,
-              offset: const Offset(-8, 10),
+              offset: const Offset(-4, 8),
             ),
           ],
           borderRadius: BorderRadius.circular(10),

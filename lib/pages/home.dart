@@ -50,6 +50,7 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          title: const Text("Home"),
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: Builder(
