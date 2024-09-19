@@ -56,7 +56,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
         ),
       ),
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

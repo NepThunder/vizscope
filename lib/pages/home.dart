@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: const Text("Home"),

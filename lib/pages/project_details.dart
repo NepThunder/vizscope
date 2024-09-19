@@ -81,7 +81,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: Container(
-                                    width: 80,
                                     height: 40,
                                     decoration: BoxDecoration(
                                       color: Colors.white.withOpacity(0.5),
@@ -306,23 +305,23 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Pending Work",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
+                // const SizedBox(height: 20),
+                // Container(
+                //   padding: const EdgeInsets.all(12),
+                //   decoration: BoxDecoration(
+                //     color: Colors.grey[300],
+                //     borderRadius: BorderRadius.circular(10),
+                //   ),
+                //   child: const Center(
+                //     child: Text(
+                //       "Pending Work",
+                //       style: TextStyle(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
