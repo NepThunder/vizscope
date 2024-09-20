@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:vizscope/colors.dart';
 import 'package:vizscope/firebase/firebase_auth.dart';
 import 'package:vizscope/pages/forgot_password.dart';
 
@@ -101,11 +102,14 @@ class _LoginAuthenticationState extends State<LoginAuthentication> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/background_image.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
+          // color: Colors.grey[100],
+          //   color: Color(0xFFD9BBF9),
+          color: AppColor.bgColor
+          // image: DecorationImage(
+          //   // image: AssetImage('assets/images/background_image_1.png'),
+          //   fit: BoxFit.cover,
+          // ),
+          ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
@@ -195,16 +199,17 @@ class _LoginAuthenticationState extends State<LoginAuthentication> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           backgroundColor: const Color(0xFF00BFA5),
+                          // backgroundColor: AppColor.secondarycontainerColor,
                         ),
                         child: _isSigning
                             ? const CircularProgressIndicator(
-                                color: Colors.white,
+                                color: AppColor.textColor,
                               )
                             : const Text(
                                 "Sign In",
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: AppColor.textColor,
                                 ),
                               ),
                       ),

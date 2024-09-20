@@ -42,31 +42,34 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget _buildAnimation() {
     String currentYear = DateTime.now().year.toString();
 
-    return Stack(
-      children: [
-        Center(
-          child: Lottie.asset(
-            "assets/animations/SplashScreenAnimation.json",
-            height: 150,
-            width: 150,
+    return Container(
+      color: const Color(0xFF01161E),
+      child: Stack(
+        children: [
+          Center(
+            child: Lottie.asset(
+              "assets/animations/SplashScreenAnimation.json",
+              height: 150,
+              width: 150,
+            ),
           ),
-        ),
-        Positioned(
-          bottom: 20,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: Text(
-              '© $currentYear',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color.fromARGB(184, 0, 0, 0),
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                '© $currentYear',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFFEFF6E0),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

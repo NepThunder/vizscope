@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:vizscope/colors.dart';
 
 class ImageGridViewPage extends StatefulWidget {
   const ImageGridViewPage({super.key});
@@ -14,8 +15,14 @@ class _ImageGridViewPageState extends State<ImageGridViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.bgColor,
       appBar: AppBar(
-        title: const Text('Site Images'),
+        foregroundColor: AppColor.textColor,
+        backgroundColor: Colors.transparent,
+        title: const Text(
+          'Site Images',
+          style: TextStyle(color: AppColor.textColor),
+        ),
         titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
       ),
       body: GridView.builder(
