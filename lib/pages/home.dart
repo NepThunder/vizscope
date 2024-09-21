@@ -39,76 +39,129 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // late StreamSubscription subscription;
+  // var isDeviceConnected = false;
+  // bool isAlertSet = false;
+
+  // @override
+  // void initState() {
+  //   getConnectivity();
+  //   super.initState();
+  // }
+
+  // getConnectivity() => subscription = Connectivity()
+  //         .onConnectivityChanged
+  //         .listen((List<ConnectivityResult> results) async {
+  //       final isConnected =
+  //           results.any((element) => element != ConnectivityResult.none);
+  //       isDeviceConnected =
+  //           isConnected && await InternetConnection().hasInternetAccess;
+  //       if (!isDeviceConnected && isAlertSet == false) {
+  //         showDialogbox();
+  //         setState(() => isAlertSet = true);
+  //       }
+  //     });
+
+  // showDialogbox() => {
+  //       showDialog(
+  //         context: context,
+  //         builder: (BuildContext context) => AlertDialog(
+  //           title: const Text("No connection"),
+  //           content: const Text("Please Check your internet connectivity"),
+  //           actions: <Widget>[
+  //             TextButton(
+  //               onPressed: () async {
+  //                 Navigator.pop(context, 'Cancel');
+
+  //                 // Check internet connection outside of setState
+  //                 isDeviceConnected =
+  //                     await InternetConnection().hasInternetAccess;
+
+  //                 // Update state synchronously
+  //                 setState(() {
+  //                   isAlertSet = false; // Reset the alert flag
+  //                   if (!isDeviceConnected) {
+  //                     isAlertSet =
+  //                         true; // Set the alert flag again if still not connected
+  //                     showDialogbox(); // Show the dialog again if still not connected
+  //                   }
+  //                 });
+  //               },
+  //               child: const Text("OK"),
+  //             )
+  //           ],
+  //         ),
+  //       )
+  //     };
+  // @override
+  // void dispose() {
+  //   subscription.cancel();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/images/background_image_1.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppColor.bgColor,
+      appBar: AppBar(
+        foregroundColor: AppColor.textColor,
+        title: const Text("Home"),
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text("Home", style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Builder(
-            builder: (context) => IconButton(
-              color: Colors.white,
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            ),
+        elevation: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            color: AppColor.textColor,
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
           ),
         ),
-        drawer: const MenuDrawer(),
-        body: Column(
-          children: [
-            Align(
-              alignment: const Alignment(0.4, 0),
-              child: Image.asset(
-                'assets/images/home_image.png',
-                height: 200,
-                width: 200,
-                fit: BoxFit.contain,
-              ),
+      ),
+      drawer: const MenuDrawer(),
+      body: Column(
+        children: [
+          Align(
+            alignment: const Alignment(0.4, 0),
+            child: Image.asset(
+              'assets/images/home_image.png',
+              height: 200,
+              width: 200,
+              fit: BoxFit.contain,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: SearchBar(),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: Home.projects.length,
-                itemBuilder: (context, index) {
-                  final project = Home.projects[index];
-                  return InkWell(
-                    onTap: () {
-                      //To be routed towards the project detail page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProjectDetails(
-                            projectName: project['name']!,
-                          ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: SearchBar(),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: ListView.builder(
+              itemCount: Home.projects.length,
+              itemBuilder: (context, index) {
+                final project = Home.projects[index];
+                return InkWell(
+                  onTap: () {
+                    //To be routed towards the project detail page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProjectDetails(
+                          projectName: project['name']!,
                         ),
-                      );
-                    },
-                    child: ProjectCard(
-                      name: project['name']!,
-                      image: project['image']!,
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+                      ),
+                    );
+                  },
+                  child: ProjectCard(
+                    name: project['name']!,
+                    image: project['image']!,
+                  ),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -137,10 +190,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.person, color: AppColor.textColor),
+            leading: const Icon(Icons.warning, color: Colors.red),
             title: const Text(
-              'Projects',
-              style: TextStyle(color: AppColor.textColor),
+              'Project Issues',
+              style: TextStyle(color: Colors.red),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -256,7 +309,7 @@ class _ProjectCardState extends State<ProjectCard> {
                       widget.name,
                       style: const TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

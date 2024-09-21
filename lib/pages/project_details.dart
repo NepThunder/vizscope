@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vizscope/colors.dart';
 
 import 'package:vizscope/pages/image_grid_view.dart';
+import 'package:vizscope/pages/project%20details/boi_tracker.dart';
+import 'package:vizscope/pages/project%20details/fcs_refurbishment.dart';
+import 'package:vizscope/pages/project%20details/schedule.dart';
+import 'package:vizscope/pages/project%20details/weekly_report.dart';
 
 class ProjectDetails extends StatefulWidget {
   final String projectName;
@@ -370,7 +374,28 @@ class ProjectButton extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            //TODO: Implement the button press
+            if (name == "FCS Refurbishment") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FCSRefurbishment()),
+              );
+            } else if (name == "Schedule page") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Schedule()),
+              );
+            } else if (name == "BOI Tracker") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BOITracker()),
+              );
+            } else if (name == "Weekly report page") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WeeklyReport()),
+              );
+            }
           },
           style: ElevatedButton.styleFrom(
             // backgroundColor: const Color.fromRGBO(85, 194, 196, 1),
@@ -382,7 +407,7 @@ class ProjectButton extends StatelessWidget {
           ),
           child: Text(
             name,
-            style: const TextStyle(color: AppColor.textColor, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

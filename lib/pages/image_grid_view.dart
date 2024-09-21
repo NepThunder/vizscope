@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:http/http.dart' as http;
 import 'package:vizscope/colors.dart';
 
 class ImageGridViewPage extends StatefulWidget {
@@ -12,6 +14,8 @@ class _ImageGridViewPageState extends State<ImageGridViewPage> {
   final List<String> imagePaths =
       List.generate(10, (index) => 'assets/dummyImages/dummyimage1.jpg');
 
+  List<XFile>? _selectedImages = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +25,7 @@ class _ImageGridViewPageState extends State<ImageGridViewPage> {
         backgroundColor: Colors.transparent,
         title: const Text(
           'Site Images',
-          style: TextStyle(color: AppColor.textColor),
         ),
-        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -50,6 +52,12 @@ class _ImageGridViewPageState extends State<ImageGridViewPage> {
           );
         },
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     _pickImages();
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 
@@ -78,5 +86,45 @@ class _ImageGridViewPageState extends State<ImageGridViewPage> {
         ),
       ),
     );
+  }
+
+  Future _uploadImage(XFile image) async {
+    final url = Uri.parse('server api');
+    final request = http.MultipartRequest('POST', url);
+    final file = await http.MultipartFile.fromPath('image', image.path);
+    request.files.add(file);
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future _pickImages() async {
+    final ImagePicker picker = ImagePicker();
+    _selectedImages = await picker.pickMultiImage();
+    if (_selectedImages != null) {
+      for (var image in _selectedImages!) {
+        try {
+          final uploadResult = await _uploadImage(image);
+          if (mounted) {
+            if (uploadResult) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Uploaded: ${image.name}')));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error uploading ${image.name}')));
+            }
+          }
+        } catch (e) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Error uploading ${image.name}: $e')));
+          }
+        }
+      }
+    }
   }
 }

@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:logger/logger.dart';
+import 'package:vizscope/dependency_injection.dart';
 import 'package:vizscope/pages/login_authentication.dart';
 import 'package:vizscope/pages/home.dart';
 import 'package:vizscope/pages/splash_screen.dart';
@@ -18,6 +20,7 @@ void main() async {
   }
 
   runApp(const Routepath());
+  DependencyInjection.init();
 }
 
 class Routepath extends StatelessWidget {
@@ -25,7 +28,8 @@ class Routepath extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      // home:'/',
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
