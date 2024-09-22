@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class NetworkController extends GetxController {
   final Connectivity _connectivity = Connectivity();
@@ -22,7 +23,7 @@ class NetworkController extends GetxController {
       }
     } else {
       if (isDialogShowing.value) {
-        Get.back(); // Close the dialog if it's open
+        Get.back();
         isDialogShowing.value = false;
       }
     }
@@ -38,7 +39,7 @@ class NetworkController extends GetxController {
         actions: [
           TextButton(
             onPressed: () {
-              Get.back(); // Close the dialog
+              Get.back();
               isDialogShowing.value = false;
               _checkInternetConnection();
             },
@@ -51,7 +52,15 @@ class NetworkController extends GetxController {
   }
 
   Future<void> _checkInternetConnection() async {
-    final result = await _connectivity.checkConnectivity();
-    _updateConnectionStatus(result);
+    try {
+      final response = await http.get(Uri.parse("https://www.google.com"));
+      if (response.statusCode == 200) {
+        _updateConnectionStatus([ConnectivityResult.wifi]);
+      } else {
+        _updateConnectionStatus([ConnectivityResult.none]);
+      }
+    } catch (e) {
+      _updateConnectionStatus([ConnectivityResult.none]);
+    }
   }
 }
