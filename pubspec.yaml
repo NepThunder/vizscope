@@ -45,9 +45,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^1.2.2
   connectivity_plus: ^6.0.0
-  internet_connection_checker_plus: ^2.5.2
+  # internet_connection_checker_plus: ^2.5.2
   image_picker: ^1.1.2
   get: ^4.6.6
+  fl_chart: ^0.69.0
 
 dev_dependencies:
   flutter_test:
