@@ -3,8 +3,22 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class FCSRefurbishment extends StatelessWidget {
+class FCSRefurbishment extends StatefulWidget {
   const FCSRefurbishment({super.key});
+
+  @override
+  State<FCSRefurbishment> createState() => _FCSRefurbishmentState();
+}
+
+class _FCSRefurbishmentState extends State<FCSRefurbishment> {
+  final data = [
+    [172.00, 142.76, 173.68],
+    [16.00, 20.76, 15.93],
+    [2.00, 1.93, 1.93],
+    [12.00, 12.70, 12.70],
+    [100.00, 135.61, 135.61],
+    [45.00, 80.46, 80.46],
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +66,7 @@ class FCSRefurbishment extends StatelessWidget {
                       child: BarChart(
                         BarChartData(
                           alignment: BarChartAlignment.spaceAround,
-                          maxY: 180,
+                          maxY: MaxValueFinder().findMaxValue(data),
                           barTouchData: BarTouchData(enabled: false),
                           titlesData: FlTitlesData(
                             show: true,
@@ -60,7 +74,7 @@ class FCSRefurbishment extends StatelessWidget {
                               sideTitles: SideTitles(
                                 showTitles: true,
                                 getTitlesWidget: getBottomTitles,
-                                reservedSize: 50,
+                                reservedSize: 240,
                               ),
                             ),
                             leftTitles: AxisTitles(
@@ -83,8 +97,24 @@ class FCSRefurbishment extends StatelessWidget {
                             ),
                             topTitles: const AxisTitles(
                                 sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: const AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                interval: 20,
+                                getTitlesWidget:
+                                    (double value, TitleMeta meta) {
+                                  return Text(
+                                    value.toInt().toString(),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  );
+                                },
+                                reservedSize: 40,
+                              ),
+                            ),
                           ),
                           gridData: FlGridData(
                             show: true,
@@ -229,9 +259,9 @@ class ValueLabelPainter extends CustomPainter {
       [45.00, 80.46, 80.46],
     ];
 
-    final double chartWidth = size.width - 75;
+    final double chartWidth = size.width - 115;
     final double groupWidth = chartWidth / 6;
-    const double barWidth = 16;
+    const double barWidth = 18;
 
     for (int i = 0; i < data.length; i++) {
       for (int j = 0; j < data[i].length; j++) {
@@ -241,19 +271,19 @@ class ValueLabelPainter extends CustomPainter {
         );
         textPainter.layout();
 
-        final double groupStartX = 120 + i * groupWidth;
+        final double groupStartX = 115 + i * groupWidth;
         final double barCenterX = groupStartX + j * (barWidth) + barWidth / 2;
 
-        const double maxHeight = 180;
+        double maxHeight = MaxValueFinder().findMaxValue(data);
         final double barHeight = data[i][j] / maxHeight * (size.height - 90);
-        final double yPosition = size.height - barHeight - 90;
+        final double yPosition = size.height - 8 - barHeight - 85;
 
         canvas.save();
         canvas.translate(barCenterX, yPosition);
         canvas.rotate(-pi / 2);
 
         textPainter.paint(
-            canvas, Offset(-textPainter.height / 2, -textPainter.width / 2));
+            canvas, Offset(-textPainter.height, -textPainter.width / 2));
 
         canvas.restore();
       }
@@ -262,4 +292,23 @@ class ValueLabelPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class MaxValueFinder {
+  double findMaxValue(List<List<double>> data) {
+    double maxValue =
+        data.fold<double>(double.negativeInfinity, (maxValue, list) {
+      double maxInList = list.reduce(
+          (double value, double element) => value > element ? value : element);
+      return maxValue > maxInList ? maxValue : maxInList;
+    });
+
+    int roundedValue = (maxValue / 20).ceil() * 20;
+
+    if (roundedValue - maxValue < 20) {
+      roundedValue += 20;
+    }
+
+    return roundedValue.toDouble();
+  }
 }
