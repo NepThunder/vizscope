@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:vizscope/colors.dart';
 
 class FCSRefurbishment extends StatefulWidget {
   const FCSRefurbishment({super.key});
@@ -24,26 +25,28 @@ class _FCSRefurbishmentState extends State<FCSRefurbishment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: AppColor.textColor,
+        backgroundColor: Colors.transparent,
         title: const Text("FCS Refurbishment"),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.bgColor,
       body: Column(
         children: [
-          const SizedBox(height: 40),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Text(
-              'FCS Summary',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-            ),
-          ),
+          // const SizedBox(height: 20),
+          // Container(
+          //   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          //   decoration: BoxDecoration(
+          //     color: AppColor.textColor,
+          //     borderRadius: BorderRadius.circular(10),
+          //   ),
+          //   child: const Text(
+          //     'FCS Summary',
+          //     style: TextStyle(
+          //       color: AppColor.textColor,
+          //       fontSize: 20,
+          //     ),
+          //   ),
+          // ),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -86,7 +89,7 @@ class _FCSRefurbishmentState extends State<FCSRefurbishment> {
                                   return Text(
                                     value.toInt().toString(),
                                     style: const TextStyle(
-                                      color: Colors.black,
+                                      color: AppColor.textColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12,
                                     ),
@@ -106,7 +109,7 @@ class _FCSRefurbishmentState extends State<FCSRefurbishment> {
                                   return Text(
                                     value.toInt().toString(),
                                     style: const TextStyle(
-                                      color: Colors.black,
+                                      color: AppColor.textColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12,
                                     ),
@@ -123,7 +126,8 @@ class _FCSRefurbishmentState extends State<FCSRefurbishment> {
                             verticalInterval: 1,
                             getDrawingHorizontalLine: (value) {
                               return FlLine(
-                                color: Colors.grey.withOpacity(0.3),
+                                // color: Colors.grey.withOpacity(0.3),
+                                color: Colors.grey.withOpacity(0.5),
                                 strokeWidth: 1,
                               );
                             },
@@ -163,7 +167,7 @@ class _FCSRefurbishmentState extends State<FCSRefurbishment> {
 
   Widget getBottomTitles(double value, TitleMeta meta) {
     const style = TextStyle(
-      color: Colors.black,
+      color: AppColor.textColor,
       fontWeight: FontWeight.bold,
       fontSize: 12,
     );
@@ -267,7 +271,7 @@ class ValueLabelPainter extends CustomPainter {
       for (int j = 0; j < data[i].length; j++) {
         textPainter.text = TextSpan(
           text: data[i][j].toStringAsFixed(2),
-          style: const TextStyle(color: Colors.black, fontSize: 12),
+          style: const TextStyle(color: AppColor.textColor, fontSize: 12),
         );
         textPainter.layout();
 
